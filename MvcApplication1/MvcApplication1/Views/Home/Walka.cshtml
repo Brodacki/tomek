@@ -1,0 +1,364 @@
+﻿@using MvcApplication1.Models
+@using MvcApplication1.Controllers
+@model Potwor
+
+<!DOCTYPE html>
+<html>
+<head>
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>@ViewBag.Title</title>
+    <link href="@Url.Content("~/Content/Site2.css")" rel="stylesheet" type="text/css" />
+<style>
+.grid-container {
+  display: grid;
+  grid-row-gap: 0px;
+  grid-template-columns: auto auto auto auto auto auto auto auto;
+
+  padding: 40px;
+  height: 40px;
+  width: 320px;
+}
+.grid-container2 {
+  display: grid;
+  grid-row-gap: 0px;
+  grid-template-columns: auto auto auto auto auto auto;
+  
+ 
+  height: 50px;
+  width: 320px;
+}
+
+
+.grid-item {
+  background-color: rgba(255, 255, 255, 0.8);
+  /*border: 1px solid rgba(0, 0, 0, 0.8);*/
+
+  font-size: 30px;
+  text-align: center;
+  height: 40px;
+  width: 40px;
+  background-image: radial-gradient(red, yellow);
+
+}
+
+.button{
+	padding-left: 40px;
+	padding-right: 40px;
+    margin-left: 40px;
+    margin-top: 10px;
+	background-image: linear-gradient( #C0C0C0, #808080);
+    position:relative;
+}
+
+.label{
+	padding-left: 40px;
+	padding-right: 40px;
+    margin-left: 20px;
+    position:relative;
+}
+
+.grid-item2 {
+  background-color: rgba(255, 255, 255, 0.8);
+  /*border: 1px solid rgba(0, 0, 0, 0.8);*/
+  
+  font-size: 30px;
+  text-align: center;
+  height: 240px;
+  width: 160px;
+  background-image: radial-gradient(red, yellow);
+
+
+}
+
+.grid-item3 {
+  background-color: rgba(255, 255, 255, 0.8);
+  /*border: 1px solid rgba(0, 0, 0, 0.8);*/
+  
+  font-size: 30px;
+  text-align: center;
+  height: 130px;
+  width: 440px;
+  background-image: radial-gradient(red, yellow);
+  z-index: -1;
+}
+
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 0px;
+ 
+}
+</style>
+</head>
+<body onload="onLoad1()">
+   
+  <input onmouseover= "przebiegBitwypokaz()" onmousemove="przebiegBitwypokaz()" onmouseout ="przebiegBitwyukryj()"  class="button" type="button" value="Przebieg bitwy" style=" background-image: radial-gradient(red, yellow);  position: absolute; left: 440px; top: 0px; font-size: 11pt; font-style: italic"></input>
+          
+  <textarea style="display: none;  background-image: radial-gradient(red, yellow);  position: absolute; left: 440px; top: 0px; height:100px; font-size: 11pt; font-style: italic" id="przebiegBitwy">
+At w3schools.com you will learn how to make a website. We offer free tutorials in all web development technologies.
+</textarea>
+              
+
+     
+    @for (int j = 0; j <= 7; j++)
+    {
+        
+   
+      for(int i = 0; i <= 10; i++){
+       
+         if (j == 0||j==7)
+         {
+          <div class="grid-item" style="position: absolute; left: @(i*40)px; top: @(j*40)px"></div>
+         }
+        else if(i ==0 ||i ==5||i ==10) 
+        {
+         <div class="grid-item" style="position: absolute; left: @(i*40)px; top:@(j*40)px"></div>
+        }
+          
+       else  if ((i == 1 || i == 6)&&j ==1)
+       {
+           if(i==1){
+            <div class="grid-item2" style="position: absolute; left: @(i*40)px; top:@(j*40)px">
+                <img class="center" src="../../Images/Postac24.png" style="width:70%; height: 70%; margin-top: 30px"></img>
+@*                <img  class="bar" style="display:block;  position: absolute; width:74px; height: 94 px;  left:400px; top:383px" src="../../Images/Potwor12bb.gif"  id="fname2" ">    *@
+            </div>
+    }
+    else{
+            <div class="grid-item2" style="position: absolute; left: @(i*40)px; top:@(j*40)px">
+                <img class="center" src=@(Model.sciezka) style="width:90%; height: 90%; margin-top: @(Model.margin)px"></img>
+@*                <img  class="bar" style="display:block;  position: absolute; width:74px; height: 94 px;  left:400px; top:383px" src="../../Images/Potwor12bb.gif"  id="fname2" ">    *@
+            </div>    
+               
+           }
+
+       }
+     
+       
+     }      
+     }
+    
+             
+    <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+    <div>    
+            @*<input onclick= "atakPostaci()"  class="button" type="button" value="Atak @(Model.rodzaj)"></input>*@
+       
+        <label id="labelAtakBohater" class="label" style=""><I><b><font id="fontlabelAtakBohater" size="3">Atak @(((Bohater)System.Web.HttpContext.Current.Application["Bohater"]).Nazwa ) !!!</font></b></I></label> 
+        <label id="labelAtak" class="label" style=""><I><b><font id="fontlabelAtak" size="3">Atak @(Model.rodzaj) !!!</font></b></I></label>
+    </div>
+    <div>
+        <input type="submit" id="przyciskAtaku"  onclick= "atakPostaci()" disabled="true"  class="button" type="button" value="Atak Robina"  ></input> 
+    </div>
+    <label style="position: absolute; left: 100px; top:300px"><h3>Robin</h3></label>
+    <label style="position: absolute; left: 300px; top:300px"><h3>@(Model.rodzaj)</h3></label>
+     <div id="labelbohaterzycie">
+    <label style="position: absolute; left: 35px; top:345px"><I><font size="2">Punkty życia:  @(((Bohater)System.Web.HttpContext.Current.Application["Bohater"]).PunktyZycia )</font></I></label>
+    </div>
+     <div id="labelpotworzycie">
+     <label  style="position: absolute; left: 235px; top:345px"><I><font size="2">Punkty życia: @(Model.punktyzycia)</font></I></label>
+    </div>
+   
+     <label   style="position: absolute; left: 35px; top:365px"><I><font size="2">Punkty magi:  @(((Bohater)System.Web.HttpContext.Current.Application["Bohater"]).PunktyMagii )</font></I></label>
+     
+        
+        <label style="position: absolute; left: 235px; top:365px"><I><font size="2">Punkty magi: @(Model.punktymagi)</font></I></label>
+     <div class="grid-item3" style="position: absolute; left: 0px; top: 320px"></div>
+ <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+    <script>
+         
+
+        function przebiegBitwypokaz() {
+
+            var x = document.getElementById("przebiegBitwy");
+
+            if (x.style.display === "none")
+                x.style.display = "block";
+
+        }
+        function przebiegBitwyukryj() {
+            var x = document.getElementById("przebiegBitwy");
+            x.style.display = "none";
+
+        }
+
+        var timer
+        var labelAtak
+        var fontlabelAtak
+        var timer
+        var timer2
+        var licznik
+        var licznik2
+        var CzyTwojaTura
+
+        function onLoad1() {
+            labelAtak = document.getElementById("labelAtak");
+            fontlabelAtak = document.getElementById("fontlabelAtak");
+            timer = setInterval(internal, 200);
+            //var przyciskAtaku = document.getElementById("przyciskAtaku");
+
+            licznik = 0;
+            licznik2 = 0;
+            CzyTwojaTura = 0;
+        }
+
+        function atakPostaci() {
+            if (CzyTwojaTura == 1) {
+
+               
+                $.ajax({
+                    type: "POST",
+                    url: "/Home/Walka?PotworID=@(Model.id)&par=1",
+                        success: function (data) {
+                           // var t = 1;
+                            //alert(data)
+                            if (data ==1) {
+                                window.location = "/Home/Index";
+
+                            }
+                        }
+                    })
+
+                   $("#labelpotworzycie").load(" #labelpotworzycie");
+                   //setTimeout(setInterval, 3000, timer);
+                   timer2 = setInterval(internal2, 200);
+
+                    przyciskAtaku.disabled = true;
+                //    CzyTwojaTura = 0;
+
+
+                }
+
+
+        }
+    @*       @if (MvcApplication1.Controllers.HomeController.CzyTwojaTura == 1)
+           {
+              
+                  @(
+                  ((Bohater)System.Web.HttpContext.Current.Application["Bohater"]).AtakBohatera(Model.id))
+               @(MvcApplication1.Controllers.HomeController.CzyTwojaTura = 0)
+               <text>
+                $("#labelpotworzycie").load(" #labelpotworzycie");
+                </text>
+               }
+
+
+
+                $("#labelpotworzycie").load(" #labelpotworzycie");
+                //       document.getElementById("labelpotworzycie").contentWindow.reload(true);  // .location.reload(true);
+              //  przyciskAtaku.disabled = true;
+                //timer = setInterval(internal, 200);
+            }*@
+
+   @*     function atakPotwora() {
+            var t = 5
+
+            @{ 
+                if( MvcApplication1.Controllers.HomeController.CzyTwojaTura == 0){
+                   Model.AtakPotwora(((Bohater)System.Web.HttpContext.Current.Application["Bohater"]));
+                   MvcApplication1.Controllers.HomeController.CzyTwojaTura = 1;
+                  }
+               };
+            $("#labelbohaterzycie").load(" #labelbohaterzycie");
+
+
+        }*@
+
+
+        function internal2() {
+
+            if (licznik2 % 2 == 0) {
+                fontlabelAtakBohater.style.color = "black";
+                labelAtakBohater.style.backgroundColor = "";
+            }
+            else {
+                fontlabelAtakBohater.style.color = "white";
+                labelAtakBohater.style.backgroundColor = "green";
+            }
+            if (licznik2 == 10) {
+
+                licznik2 = 0;
+                clearInterval(timer2);
+                licznik = 0;
+                CzyTwojaTura = 0;
+                timer = setInterval(internal, 200);
+            }
+           
+            licznik2++;
+        }
+
+
+        function internal() {
+
+            if (licznik > 5) {
+                if (licznik % 2 == 0) {
+                    fontlabelAtak.style.color = "black";
+                    labelAtak.style.backgroundColor = "";
+                }
+                else {
+                    fontlabelAtak.style.color = "white";
+                    labelAtak.style.backgroundColor = "red";
+                }
+
+                if (licznik == 20) {
+
+
+                    licznik = 0;
+
+
+
+                    @*@{ if( MvcApplication1.Controllers.HomeController.CzyTwojaTura == 0){
+                   Model.AtakPotwora(((Bohater)System.Web.HttpContext.Current.Application["Bohater"]));
+                   MvcApplication1.Controllers.HomeController.CzyTwojaTura = 1;
+                  }
+               };*@
+
+                    if (CzyTwojaTura == 0) {
+
+                        $.ajax({
+                            type: "POST",
+                            url: "/Home/Walka?PotworID=@(Model.id)&par=0",
+                            success: function (data) {
+                                if (data == 1) {
+                                    window.location = "/Home/Index";
+
+                                }
+
+                            }
+                        })
+
+
+                        $("#labelbohaterzycie").load(" #labelbohaterzycie");
+
+                        clearInterval(timer);
+                        przyciskAtaku.disabled = false;
+                        CzyTwojaTura = 1;
+                    }
+                }
+
+
+                
+
+            }
+            licznik++;
+       }
+
+
+
+   
+
+        @*          @{
+            var controller = (ViewContext.Controller as HomeController);
+            controller.AtakBohatera();
+}*@
+        //alert("Postac atakuje")
+
+       
+
+
+    </script>
+</body>
+</html>
+
+
+

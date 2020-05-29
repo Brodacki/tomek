@@ -1,0 +1,154 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>@ViewBag.Title</title>
+    <link href="@Url.Content("~/Content/Site2.css")" rel="stylesheet" type="text/css" />
+   
+</head>
+<body>
+<!--<script src="/Content/MyScript.js"></script>--> 
+      
+
+<h2>@ViewBag.Message</h2>
+
+<p>A function is triggered when the user releases a key in the input field. The function transforms the character to upper case.</p>
+Enter your name:
+
+    <input id="Text1" type="text" />
+    <input id="Text2" type="text" />
+    <input id="Text3" type="text" />
+    <input id="Text4" type="text" />
+    <input id="Text5" type="text" />
+    <input id="Text6" type="text" />
+    <button id="buttonPause" onclick="pause()" type="button">Pause</button>
+<div id ="square1" class="square">
+
+   
+<img  id="plansza1" class="my-image" alt ="" src="../../Images/wnetrzezamku1.png" />
+<img style="position: absolute; left:100px; top:383px" src="../../Images/Postac24.png"  id="fname" ">       
+</div>
+
+<!--<p>
+    To learn more about ASP.NET MVC visit test <a href="http://asp.net/mvc" title="ASP.NET MVC Website">http://asp.net/mvc</a>.
+</p>-->
+
+ <script>
+     /// <reference path="../Views/Home/Zamekironfirst.cshtml" />
+     //document.body.addEventListener(myFunction2);
+     var numerPlanszy = 1
+
+     square1.className = "square2"
+     fname.style.top = 460 + "px";
+     fname.style.left = 260 + "px";
+
+     document.body.addEventListener('keyup', myFunction3);
+     document.body.addEventListener('keyup', myFunction);
+     function myFunction3() {
+         var x1 = document.getElementById("fname");
+         t1 = parseInt(x1.style.top, 10);
+         left1 = parseInt(x1.style.left, 10);
+         //     alert("test ");
+
+         if (left1 >= 255 && left1 <= 280 && t1 <= 650 && t1 >= 510) {
+             if (confirm("Czy chcesz wejsc z zamku ?")) {
+                 numerPlanszy = 1
+                 window.location.href = "/Home/Index";
+                 /*square1.className = "square2"
+                 fname2.style.display = "none"
+                 plansza1.src = "../../Images/wnetrzezamku1.png"
+                 plansza1.style.left = 0 + "px";
+                 plansza1.style.top = 0 + "px";
+                 fname.style.left = 161 + "px";
+                 fname.style.top = 463 + "px"; */
+             }
+         }
+     }
+
+
+     /*
+     var timer = setInterval(internal, 1000);
+
+
+     function internal() {
+
+       //  var x = document.getElementById("fname2");
+
+         num = parseInt(x.style.left, 10) || 0;
+         num2 = parseInt(x.style.top, 10) || 0;
+
+
+         Text3.value = x.style.top;
+         Text4.value = fname.style.top;
+        
+         Text6.value = (fname.style.top) >= (parseInt(x.style.top) - 30)
+
+        if (distance < 0) {
+             clearInterval(x);
+             document.getElementById("demo").innerHTML = "EXPIRED";
+         } 
+     }
+
+     */
+     function pause() {
+         if (buttonPause.textContent == "Pause") {
+             clearInterval(timer);
+             buttonPause.textContent = "Start"
+         }
+         else if (buttonPause.textContent == "Start") {
+             timer = setInterval(internal, 1000);
+             buttonPause.textContent = "Pause"
+         }
+
+     }
+
+     function myFunction(e) {
+         var x = document.getElementById("fname");
+         /* var i;
+          i = x.style.left;
+          i += 2;*/
+         if (e.keyCode == 37) {
+             // alert("Hello! I am an alert box!!");
+             //  x.style.left = i + "px";
+             // x.value = x.value.toUpperCase();
+             num = parseInt(x.style.left, 10) || 0;
+             num -= 5;
+             x.style.left = num + "px";
+             x.value = e.keyCode;
+         }
+         if (e.keyCode == 39) {
+             // x.style.left = i + "px";
+             //x.value = x.value.toUpperCase();
+             num = parseInt(x.style.left, 10) || 0;
+             num += 5;
+             x.style.left = num + "px";
+             x.value = e.keyCode;
+         }
+         if (e.keyCode == 38) {
+             // x.style.left = i + "px";
+             //x.value = x.value.toUpperCase();
+             num = parseInt(x.style.top, 10) || 0;
+             num -= 5;
+             x.style.top = num + "px";
+             x.value = e.keyCode;
+         }
+
+         if (e.keyCode == 40) {
+             // x.style.left = i + "px";
+             //   x.value = x.value.toUpperCase();
+             num = parseInt(x.style.top, 10) || 0;
+             num += 5;
+             x.style.top = num + "px";
+             x.value = e.keyCode;
+         }
+     
+         Text1.value = x.style.top;
+         Text2.value = x.style.left;
+     }
+
+ </script>    
+</body>
+</html>
+
+
+

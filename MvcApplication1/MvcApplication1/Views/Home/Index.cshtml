@@ -1,0 +1,305 @@
+﻿@using MvcApplication1.Models
+@using MvcApplication1.Controllers
+
+
+@model List<Potwor>
+
+
+<!DOCTYPE html>
+<html>
+<head>
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>@ViewBag.Title</title>
+    <link href="@Url.Content("~/Content/Site2.css")" rel="stylesheet" type="text/css" />
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+   
+</head>
+<body>
+<!--<script src="/Content/MyScript.js"></script>--> 
+    <!--   <script  src="@Url.Content("~/Content/MyScript.js")"></script> --> 
+
+    <style>
+  foo {
+	0% { content: "../../Images/Potwor12bb.png" }
+	25% { content: "../../Images/Potwor12bb.png" }
+	
+}
+ 
+.bar {
+	/**animation-name: foo;*/
+	animation-duration: 3s;
+	animation-iteration-count: infinite;
+    src="../../Images/Potwor12bb.png";
+	
+}
+
+    </style>
+  <script type="text/javascript">
+      var numerPlanszy = 1
+      var timer = setInterval(internal, 1000);
+      var ostatniruch =0
+
+
+      $(document).ready(internal)
+
+      document.body.addEventListener('keyup', myFunction);
+      function myFunction2() {
+          var x = document.getElementById("fname");
+          t = parseInt(x.style.top, 10) || 0
+          left = parseInt(x.style.left, 10) || 0
+          // alert(" " + t + " " + left);
+
+          if (left >= 205 && left <= 240 && t <= 370 && t >= 300) {
+              if (confirm("Czy chcesz wejsc do zamku Casle Ironfirs?")) {
+
+                  window.location.href = "/Home/Zamekironfirst";
+                  /*square1.className = "square2"
+                  fname2.style.display = "none"
+                  plansza1.src = "../../Images/wnetrzezamku1.png"
+                  plansza1.style.left = 0 + "px";
+                  plansza1.style.top = 0 + "px";
+                  fname.style.left = 161 + "px";
+                  fname.style.top = 463 + "px"; */
+              }
+          }
+      }
+
+    
+
+      function onclick1(){
+          alert("test");
+          var url = '@Url.Action("Walka", "Home")';
+          window.location = url;
+      }
+
+      function internal() {
+
+ @foreach (var item in Model.Where(id =>id.id =="fname2"))
+{
+              <text>
+          var x = document.getElementById("@(item.id)");
+        //  alert("@(item.id)")
+          num = parseInt(x.style.left, 10) || 0;
+          num2 = parseInt(x.style.top, 10) || 0;
+          szybkosc = @(item.szybkosc);
+         
+
+          if (parseInt(fname.style.left) < parseInt(x.style.left)) {
+
+               @if(item.ostatniruch==2) {
+                    @(item.ostatniruch =1);
+                   <text>
+              x.src = "@(item.sciezka)";
+                 </text>
+               }
+             
+
+              if( parseInt(x.style.left)-parseInt(fname.style.left) < szybkosc)
+                  num-=(parseInt(x.style.left)-parseInt(fname.style.left))
+              num -= szybkosc;
+              x.style.left = num + "px";
+              
+          }
+
+          else if (parseInt(fname.style.left) > parseInt(x.style.left)) {
+             
+          
+              @if(item.ostatniruch ==1){
+               @(item.ostatniruch =2);
+                <text>
+                x.src = "@(item.sciezkaBack)";
+                </text>
+               }
+
+              if( parseInt(fname.style.left) - parseInt(x.style.left) < szybkosc)
+                  num+=parseInt(fname.style.left) - parseInt(x.style.left); 
+              num += szybkosc;
+              x.style.left = num + "px";
+              
+          }
+          else if (parseInt(fname.style.top) > parseInt(x.style.top)) {
+              
+              num2 += szybkosc;
+              x.style.top = num2 + "px";
+            
+          }
+          else if (parseInt(fname.style.top) < parseInt(x.style.top)) {
+             
+              num2 -= szybkosc;
+              x.style.top = num2 + "px";
+          }
+
+
+          if (x.style.display === "block" && parseInt(fname.style.top) >= (parseInt(x.style.top) - 50) && parseInt(fname.style.top) <= (parseInt(x.style.top) + 50)
+              && parseInt(fname.style.left) >= (parseInt(x.style.left) - 50) && parseInt(fname.style.left) <= (parseInt(x.style.left) + 50)
+              ) {
+             @{//item.punktStartowyLeftTemp =
+
+                 var t = Request["plansza1"];
+                 var t2 = Request["plansza1"];  
+                 }
+             @*  '@item.punktStartowyTopTemp' =parseInt(x.style.top)
+              '@(((Bohater)System.Web.HttpContext.Current.Application["Bohater"]).PunktStartowyLeftTemp)' = parseInt(fname.style.left)
+              '@(((Bohater)System.Web.HttpContext.Current.Application["Bohater"]).PunktStartowyTopTemp)' = parseInt(fname.style.top)*@
+
+              //window.location.href = "@Url.Action("Walka","Home", new { potworID = item.id})";
+              clearInterval(timer);
+              var formData = new FormData(document.getElementsByName('test1')[0]);
+            
+              $.ajax({
+                  type: "POST",
+                  data: formData,
+                  url:"@Url.Action("Index","Home")",
+                    success: function (data) {
+                        // var t = 1;
+                        //alert(data)
+                        if (data ==1) {
+                            window.location = "/Home/Index";
+
+                        }
+                    }
+      })
+                
+
+          @*   $(document).ready(function () {
+                  val1 = "@(item.id)";
+                  
+ 
+                  $.ajax({
+                      type: "POST",
+                      url: "@Url.Action("Index","Home")",
+                      data: {potworID1: val1},
+            dataType: "text",
+            success: function (msg) {
+                var t =1;
+            },
+            error: function (req, status, error) {
+                alert(error);
+            }
+        }); 
+               });*@
+
+             
+   
+             // window.location.href = "/Home/Walka";
+              // alert("Hello! I am an alert box!!");
+              // var url = Url.Action("Home", "Walka"); //,  "http://localhost/home/walka";
+              // $(location).attr('href', url);
+
+          }
+
+          Text3.value = x.style.left;
+          Text4.value = x.style.top;
+         // Text5.value = x.style.left;
+         // Text6.value = x.style.top;
+         // Text6.value =  "@(((Bohater)System.Web.HttpContext.Current.Application["Bohater"]).Nazwa)" 
+          /*if (distance < 0) {
+              clearInterval(x);
+              document.getElementById("demo").innerHTML = "EXPIRED";
+          }*/
+           </text>
+      }
+      }
+
+      function pause() {
+          if (buttonPause.textContent == "Pause") {
+              clearInterval(timer);
+              buttonPause.textContent = "Start"
+          }
+          else if (buttonPause.textContent == "Start") {
+              timer = setInterval(internal, 1000);
+              buttonPause.textContent = "Pause"
+          }
+
+      }
+
+      function myFunction(e) {
+          var x = document.getElementById("fname");
+          /* var i;
+           i = x.style.left;
+           i += 2;*/
+          if (e.keyCode == 37) {
+              // alert("Hello! I am an alert box!!");
+              //  x.style.left = i + "px";
+              // x.value = x.value.toUpperCase();
+              num = parseInt(x.style.left, 10) || 0;
+              num -= 5;
+              x.style.left = num + "px";
+              x.value = e.keyCode;
+          }
+          if (e.keyCode == 39) {
+              // x.style.left = i + "px";
+              //x.value = x.value.toUpperCase();
+              num = parseInt(x.style.left, 10) || 0;
+              num += 5;
+              x.style.left = num + "px";
+              x.value = e.keyCode;
+          }
+          if (e.keyCode == 38) {
+              // x.style.left = i + "px";
+              //x.value = x.value.toUpperCase();
+              num = parseInt(x.style.top, 10) || 0;
+              num -= 5;
+              x.style.top = num + "px";
+              x.value = e.keyCode;
+          }
+
+          if (e.keyCode == 40) {
+              // x.style.left = i + "px";
+              //   x.value = x.value.toUpperCase();
+              num = parseInt(x.style.top, 10) || 0;
+              num += 5;
+              x.style.top = num + "px";
+              x.value = e.keyCode;
+          }
+          if (numerPlanszy == 1)
+              myFunction2();
+          Text1.value = x.style.top;
+          Text2.value = x.style.left;
+      }
+
+
+  </script>
+<h2>@ViewBag.Message</h2>
+
+<p>A function is triggered when the user releases a key in the input field. The function transforms the character to upper case.</p>
+Enter your name:
+
+    <input id="Text1" type="text" />
+    <input id="Text2" type="text" />
+    <input id="Text3" type="text" />
+    <input id="Text4" type="text" />
+    <input id="Text5" type="text" />
+    <input id="Text6" type="text" />
+    <button id="buttonPause" onclick="pause()" type="button">Pause</button>
+<div id ="square1" class="square">
+
+   
+<img  id="plansza1" name="plansza1" class="my-image" alt ="" src="../../Images/zamek.png" />
+<form id="test1" name="test1" method="POST">
+<img style="position: absolute; left: @(((Bohater)System.Web.HttpContext.Current.Application["Bohater"]).PunktStartowyLeft)px; top: @(((Bohater)System.Web.HttpContext.Current.Application["Bohater"]).PunktStartowyTop)px" src="../../Images/Postac24.png"  id="fname" ">       
+<!--<img  class="bar" style="display:block;  position: absolute;width:250px; height: 150 px;   left:400px; top:383px" id="fname2" -->
+@foreach(var item in  Model)
+{
+    @:<img  class="bar" style="display:block;  position: absolute; width:@(item.width)px; height: @(item.height)px;  left:@(item.punktStartowyLeft)px; top:@(item.punktStartowyTop)px"; src=@(item.sciezka)  id=@(item.id)> 
+}
+ </form>
+    
+</div>
+   
+    <button id="buttonPause1" onclick="onclick1()" type="button">Pause</button>
+
+<form method="POST">
+   <input type="submit" asp-page-handler="Index" value="Submit" />
+</form>
+    
+<!--<p>
+    To learn more about ASP.NET MVC visit test <a href="http://asp.net/mvc" title="ASP.NET MVC Website">http://asp.net/mvc</a>.
+</p>-->
+
+    
+</body>
+</html>
+
+
+
